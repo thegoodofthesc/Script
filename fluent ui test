@@ -1,7 +1,7 @@
 local Library = loadstring(game:HttpGetAsync("https://github.com/ActualMasterOogway/Fluent-Renewed/releases/latest/download/Fluent.luau"))()
 
 local Window = Library:CreateWindow{
-    Title = `nil`,
+    Title = `ko`,
     SubTitle = "test1",
     TabWidth = 160,
     Size = UDim2.fromOffset(830, 525),
@@ -20,32 +20,76 @@ local Tabs = {
 }
 
 local Paragraph = Tabs.Main:CreateParagraph("Paragraph", {
-    Title = "Elite Status: 🔴", -- starts red
-    Content = "" -- no need for content
+    Title = "Client Time",  -- The title of the paragraph
+    Content = "0h:0m:0s"    -- Initial content, starting at 0 hours, 0 minutes, 0 seconds
 })
 
--- Function to detect "Assets" anywhere in the workspace
-local function findAssetsRecursive(parent)
-    for _, obj in ipairs(parent:GetDescendants()) do
-        if obj.Name == "Assets" then
-            return obj
-        end
+-- Function to update the time dynamically like a clock
+task.spawn(function()
+    local startTime = tick()  -- Get the current time in seconds since the game started
+
+    while true do
+        local elapsed = tick() - startTime  -- Calculate the time elapsed since start
+        local hours = math.floor(elapsed / 3600)  -- Get hours
+        local minutes = math.floor((elapsed % 3600) / 60)  -- Get minutes
+        local seconds = math.floor(elapsed % 60)  -- Get seconds
+
+        -- Format the time as "Xh:Xm:Xs"
+        local formattedTime = string.format("%dh:%dm:%ds", hours, minutes, seconds)
+
+        -- Update the content of the paragraph
+        Paragraph:SetValue(formattedTime)
+
+        wait(1)  -- Wait for 1 second before updating the time again
     end
-    return nil
-end
+end)
 
--- Function to update the title with status
-local function updateEliteStatus()
-    local hasAssets = findAssetsRecursive(workspace)
-    local statusDot = hasAssets and "🟢" or "🔴"
-    Paragraph:SetTitle("Elite Status: " .. statusDot)
-end
+-- Create the "Wall Status" paragraph UI with initial title
+local Paragraph = Tabs.Main:CreateParagraph("Paragraph", {
+    Title = "Bar Status: ",  -- Initial title with red status (no wall detected)
+    Content = ""  -- Empty content since you only want the title to change
+})
 
--- Initial check
-updateEliteStatus()
+-- Function to check if the "Wall" part exists in the Workspace
+task.spawn(function()
+    while true do
+        -- Look for a part named "Wall" in the Workspace
+        local barPart = game.Workspace:FindFirstChild("Bar")
 
--- Keep checking every 2 seconds
-while true do
-    task.wait(2)
-    updateEliteStatus()
-end
+        -- If the "Wall" part exists, update the title to green status
+        if barPart then
+            Paragraph:SetValue("Bar Status: 🟢")  -- Change title to green
+        else
+            -- If the "Wall" part doesn't exist, update the title to red status
+            Paragraph:SetValue("Bar Status: 🔴")  -- Change title to red
+        end
+
+        wait(1)  -- Check every 1 second
+    end
+end)
+
+-- Create the "Bar Status" paragraph UI with initial title and content
+local BarParagraph = Tabs.Main:CreateParagraph("BarStatus", {
+    Title = "Bar Status: 🔴",  -- Initial title with red status
+    Content = "🔴"  -- Initial content, but will update as needed
+})
+
+-- Function to check if the "Bar" part exists in the Workspace and update the content
+task.spawn(function()
+    while true do
+        -- Look for a part named "Bar" in the Workspace
+        local barPart = game.Workspace:FindFirstChild("Bar")
+
+        -- If the "Bar" part exists, update the content to green status
+        if barPart then
+            BarParagraph:SetValue("🟢")  -- Only update content
+            BarParagraph:SetTitle("Bar Status: 🟢")  -- You can try updating title if it works
+        else
+            -- If the "Bar" part doesn't exist, update the content to red status
+            BarParagraph:SetValue("🔴")  -- Only update content
+            BarParagraph:SetTitle("Bar Status: 🔴")  -- You can try updating title if it works
+        end
+
+        wait(1)  -- Check every 1 second
+    end
+end)
