@@ -283,19 +283,20 @@ local Tabs = {
     }
 }
 
+-- Create the "Wall Status" paragraph UI with initial title
 local Paragraph = Tabs.Main:CreateParagraph("Paragraph", {
-    Title = "Rush Status: ",  -- Initial title with red status (no RushMoving detected)
+    Title = "Rush Status: ",  -- Initial title with red status (no wall detected)
     Content = ""  -- Empty content since you only want the title to change
 })
 
--- Function to check if the "RushMoving" part exists in the Workspace
+-- Function to check if the "Wall" part exists in the Workspace
 task.spawn(function()
     while true do
         -- Look for a part named "Wall" in the Workspace
-        local rushMoving = game.Workspace:FindFirstChild("RushMoving")
+        local rushMoving = Workspace:FindFirstChild("RushMoving")
 
-        -- If the "Wall" part exists, update the title to green status
-        if barPart then
+        -- If the "RushMoving" part exists, update the title to green status
+        if RushMoving then
             Paragraph:SetValue("Rush Status: 🟢")  -- Change title to green
         else
             -- If the "Wall" part doesn't exist, update the title to red status
