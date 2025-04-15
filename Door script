@@ -293,7 +293,7 @@ local Paragraph = Tabs.Main:CreateParagraph("Paragraph", {
 task.spawn(function()
     -- Main loop: wait for "Baking Staff" to appear, then follow it
 while true do
-    local added = enemiesFolder.ChildAdded:Wait()
+    local added = Workspace.ChildAdded:Wait()
             if added.Name == "RushMoving" then
                 npc = added
             end
