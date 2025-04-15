@@ -275,3 +275,33 @@ Tabs.Main:CreateButton{
         end)
     end
 }
+
+local Tabs = {
+    Main = Window:CreateTab{
+        Title = "Npc Status",
+        Icon = "nil"
+    }
+}
+
+local Paragraph = Tabs.Main:CreateParagraph("Paragraph", {
+    Title = "Rush Status: ",  -- Initial title with red status (no wall detected)
+    Content = ""  -- Empty content since you only want the title to change
+})
+
+-- Function to check if the "Wall" part exists in the Workspace
+task.spawn(function()
+    while true do
+        -- Look for a part named "Wall" in the Workspace
+        local MovingRushPart = game.Workspace:FindFirstChild("MovingRush")
+
+        -- If the "Wall" part exists, update the title to green status
+        if barPart then
+            Paragraph:SetValue("Bar Status: 🟢")  -- Change title to green
+        else
+            -- If the "Wall" part doesn't exist, update the title to red status
+            Paragraph:SetValue("Bar Status: 🔴")  -- Change title to red
+        end
+
+        wait(1)  -- Check every 1 second
+    end
+end)
