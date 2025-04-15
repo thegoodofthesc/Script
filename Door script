@@ -291,9 +291,12 @@ local Paragraph = Tabs.Main:CreateParagraph("Paragraph", {
 
 -- Function to check if the "Wall" part exists in the Workspace
 task.spawn(function()
-    while true do
-        -- Look for a part named "Wall" in the Workspace
-        local rushMoving = Workspace:FindFirstChild("RushMoving")
+    -- Main loop: wait for "Baking Staff" to appear, then follow it
+while true do
+    local added = enemiesFolder.ChildAdded:Wait()
+            if added.Name == "RushMoving" then
+                npc = added
+            end
 
         -- If the "RushMoving" part exists, update the title to green status
         if RushMoving then
