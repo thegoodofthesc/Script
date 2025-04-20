@@ -26,7 +26,21 @@ local Tabs = {
     }
 }
 
-local Toggle1 = Tabs.Main:CreateToggle("MyToggle", {Title = "aimbot", Default = false})
+local Toggle1 = Tabs.Main:CreateToggle("MyToggle", {Title = "aimbot zombie", Default = false})
+
+Toggle1:OnChanged(function()
+    if not Toggle1Interacted then
+        Toggle1Interacted = true
+        return
+    end
+
+    aimbotEnabled = not aimbotEnabled
+
+    if aimbotEnabled then
+        -- Set the range limit for the aimbot (in studs)
+        local AIMBOT_RANGE = 50  -- Change this value to adjust the range
+
+local Toggle1 = Tabs.Main:CreateToggle("MyToggle", {Title = "aimbot zombie", Default = false})
 
 Toggle1:OnChanged(function()
     if not Toggle1Interacted then
