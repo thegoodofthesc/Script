@@ -113,14 +113,14 @@ Toggle1:OnChanged(function()
     end
 end)
 
-local Toggle2 = Tabs.Main:CreateToggle("MyToggle", {Title = "Tesla lab", Default = false})
+local Toggle1 = Tabs.Main:CreateToggle("MyToggle", {Title = "Tesla Lab", Default = false})
 
 -- Store added highlights and GUIs for cleanup
 local addedVisuals = {}
 
-Toggle2:OnChanged(function()
-    if not Toggle2Interacted then
-        Toggle2Interacted = true
+Toggle1:OnChanged(function()
+    if not Toggle1Interacted then
+        Toggle1Interacted = true
         return
     end
 
@@ -131,16 +131,16 @@ Toggle2:OnChanged(function()
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-        -- Function to highlight the whole Train model
-        local function highlightTesla lab(tesla labModel)
-            if tesla labModel and tesla labModel:IsA("Model") and tesla labModel.Name == "Tesla lab" then
+        -- Function to highlight the whole Tesla Lab model
+        local function highlightTeslaLab(model)
+            if model and model:IsA("Model") and model.Name == "Tesla Lab" then
                 -- Skip if already highlighted
-                if trainModel:FindFirstChildOfClass("Highlight") then return end
+                if model:FindFirstChildOfClass("Highlight") then return end
 
                 -- Create a Highlight for the model
                 local highlight = Instance.new("Highlight")
-                highlight.Parent = trainModel
-                highlight.Adornee = trainModel
+                highlight.Parent = model
+                highlight.Adornee = model
                 highlight.FillColor = Color3.fromRGB(0, 255, 0)
                 highlight.FillTransparency = 0.5
                 highlight.OutlineColor = Color3.fromRGB(0, 0, 0)
@@ -148,8 +148,8 @@ Toggle2:OnChanged(function()
 
                 -- Create a Billboard GUI to show distance
                 local billboardGui = Instance.new("BillboardGui")
-                billboardGui.Parent = trainModel
-                billboardGui.Adornee = trainModel -- Attach to the whole model
+                billboardGui.Parent = model
+                billboardGui.Adornee = model -- Attach to the whole model
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)
                 billboardGui.StudsOffset = Vector3.new(0, 3, 0)
                 billboardGui.AlwaysOnTop = true
@@ -160,7 +160,7 @@ Toggle2:OnChanged(function()
                 textLabel.BackgroundTransparency = 1
                 textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
                 textLabel.TextSize = 14
-                textLabel.Text = "Train - Distance: --"
+                textLabel.Text = "Tesla Lab - Distance: --"
 
                 -- Store the visuals to clean them up later
                 table.insert(addedVisuals, highlight)
@@ -177,23 +177,23 @@ Toggle2:OnChanged(function()
                     end
 
                     -- Calculate and update the distance
-                    local distance = (tesla labModel:GetModelCFrame().Position - humanoidRootPart.Position).Magnitude
-                    textLabel.Text = "Tesla lab - Distance: " .. math.floor(distance) .. " studs"
+                    local distance = (model:GetModelCFrame().Position - humanoidRootPart.Position).Magnitude
+                    textLabel.Text = "Tesla Lab - Distance: " .. math.floor(distance) .. " studs"
                 end)
             end
         end
 
-        -- Highlight all existing Train models
-        for _, tesla lab in pairs(workspace:GetDescendants()) do
-            if tesla lab:IsA("Model") and train.Name == "Tesla lab" then
-                highlightTesla lab(tesla lab)
+        -- Highlight all existing Tesla Lab models
+        for _, model in pairs(workspace:GetDescendants()) do
+            if model:IsA("Model") and model.Name == "Tesla Lab" then
+                highlightTeslaLab(model)
             end
         end
 
-        -- Watch for new Train models being added
+        -- Watch for new Tesla Lab models being added
         workspace.DescendantAdded:Connect(function(newModel)
-            if espEnabled and newModel:IsA("Model") and newModel.Name == "Tesla lab" then
-                highlightTesla lab(newModel)
+            if espEnabled and newModel:IsA("Model") and newModel.Name == "Tesla Lab" then
+                highlightTeslaLab(newModel)
             end
         end)
     else
