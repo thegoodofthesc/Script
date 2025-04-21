@@ -225,15 +225,14 @@ Toggle3:OnChanged(function()
     attackEnabled = not attackEnabled
 
     if attackEnabled then
+        local args = {
+            [1] = Vector3.new(-0.6700190901756287, -0.003967110067605972, 0.7423332333564758)
+        }
+
         task.spawn(function()
-            while autoattackEnabled do
-                local args = {
-                    [1] = Vector3.new(-0.6700190901756287, -0.003967110067605972, 0.7423332333564758)
-                }
-
+            while attackEnabled do
                 game:GetService("Players").LocalPlayer.Character.Shovel.SwingEvent:FireServer(unpack(args))
-
-                task.wait(0) -- adjust delay as needed for attack speed
+                task.wait(0)
             end
         end)
     end
