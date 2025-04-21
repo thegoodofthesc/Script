@@ -214,7 +214,7 @@ local Tabs = {
     }
 }
 
-local Toggle3 = Tabs.Main:CreateToggle("MyToggle", {Title = "Auto attack", Default = false})
+local Toggle3 = Tabs.Main:CreateToggle("MyToggle", {Title = "auto attack", Default = false})
 
 Toggle3:OnChanged(function()
     if not Toggle3Interacted then
@@ -222,18 +222,18 @@ Toggle3:OnChanged(function()
         return
     end
 
-    autoattackEnabled = not autoattackEnabled
+    attackEnabled = not attackEnabled
 
-    if autoattackEnabled then
+    if attackEnabled then
         task.spawn(function()
             while autoattackEnabled do
                 local args = {
-                    [1] = Vector3.new(0.9298266768455505, 0.10196604579687119, -0.35358887910842896)
+                    [1] = Vector3.new(-0.6700190901756287, -0.003967110067605972, 0.7423332333564758)
                 }
 
                 game:GetService("Players").LocalPlayer.Character.Shovel.SwingEvent:FireServer(unpack(args))
 
-                task.wait(0) -- adjust delay if needed
+                task.wait(0) -- adjust delay as needed for attack speed
             end
         end)
     end
