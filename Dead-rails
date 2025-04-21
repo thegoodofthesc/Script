@@ -131,16 +131,16 @@ Toggle2:OnChanged(function()
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-        -- Function to highlight the whole Train model
-        local function highlightTeslaLab(teslalabModel)
-            if teslalabModel and teslalabModel:IsA("Model") and teslalabModel.Name == "TeslaLab" then
+        -- Function to highlight the whole TeslaLab model
+        local function highlightTeslaLab(model)
+            if model and model:IsA("Model") and model.Name == "TeslaLab" then
                 -- Skip if already highlighted
-                if teslalabModel:FindFirstChildOfClass("Highlight") then return end
+                if model:FindFirstChildOfClass("Highlight") then return end
 
                 -- Create a Highlight for the model
                 local highlight = Instance.new("Highlight")
-                highlight.Parent = teslalabModel
-                highlight.Adornee = teslalabModel
+                highlight.Parent = model
+                highlight.Adornee = model
                 highlight.FillColor = Color3.fromRGB(0, 255, 0)
                 highlight.FillTransparency = 0.5
                 highlight.OutlineColor = Color3.fromRGB(0, 0, 0)
@@ -148,8 +148,8 @@ Toggle2:OnChanged(function()
 
                 -- Create a Billboard GUI to show distance
                 local billboardGui = Instance.new("BillboardGui")
-                billboardGui.Parent = teslalabModel
-                billboardGui.Adornee = teslalabModel -- Attach to the whole model
+                billboardGui.Parent = model
+                billboardGui.Adornee = model
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)
                 billboardGui.StudsOffset = Vector3.new(0, 3, 0)
                 billboardGui.AlwaysOnTop = true
@@ -160,7 +160,7 @@ Toggle2:OnChanged(function()
                 textLabel.BackgroundTransparency = 1
                 textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
                 textLabel.TextSize = 14
-                textLabel.Text = "Tesla Lab - Distance: --"
+                textLabel.Text = "TeslaLab - Distance: --"
 
                 -- Store the visuals to clean them up later
                 table.insert(addedVisuals, highlight)
@@ -177,20 +177,20 @@ Toggle2:OnChanged(function()
                     end
 
                     -- Calculate and update the distance
-                    local distance = (teslalabModel:GetModelCFrame().Position - humanoidRootPart.Position).Magnitude
-                    textLabel.Text = "Tesla Lab - Distance: " .. math.floor(distance) .. " studs"
+                    local distance = (model:GetModelCFrame().Position - humanoidRootPart.Position).Magnitude
+                    textLabel.Text = "TeslaLab - Distance: " .. math.floor(distance) .. " studs"
                 end)
             end
         end
 
-        -- Highlight all existing Train models
-        for _, teslalab in pairs(workspace:GetDescendants()) do
-            if teslalab:IsA("Model") and teslalab.Name == "TeslaLab" then
-                highlightTeslalab(teslalab)
+        -- Highlight all existing TeslaLab models
+        for _, model in pairs(workspace:GetDescendants()) do
+            if model:IsA("Model") and model.Name == "TeslaLab" then
+                highlightTeslaLab(model)
             end
         end
 
-        -- Watch for new Train models being added
+        -- Watch for new TeslaLab models being added
         workspace.DescendantAdded:Connect(function(newModel)
             if espEnabled and newModel:IsA("Model") and newModel.Name == "TeslaLab" then
                 highlightTeslaLab(newModel)
