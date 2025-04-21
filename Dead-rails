@@ -30,9 +30,9 @@ Toggle1:OnChanged(function()
         return
     end
 
-    espEnabled = not espEnabled
+    esptrainEnabled = not esptrainEnabled
 
-    if espEnabled then
+    if esptrainEnabled then
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -98,7 +98,7 @@ Toggle1:OnChanged(function()
 
         -- Watch for new Train models being added
         workspace.DescendantAdded:Connect(function(newModel)
-            if espEnabled and newModel:IsA("Model") and newModel.Name == "Train" then
+            if esptrainEnabled and newModel:IsA("Model") and newModel.Name == "Train" then
                 highlightTrain(newModel)
             end
         end)
@@ -124,9 +124,9 @@ Toggle2:OnChanged(function()
         return
     end
 
-    espEnabled = not espEnabled
+    espteslaEnabled = not espteslaEnabled
 
-    if espEnabled then
+    if espteslaEnabled then
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -192,7 +192,7 @@ Toggle2:OnChanged(function()
 
         -- Watch for new TeslaLab models being added
         workspace.DescendantAdded:Connect(function(newModel)
-            if espEnabled and newModel:IsA("Model") and newModel.Name == "TeslaLab" then
+            if espteslaEnabled and newModel:IsA("Model") and newModel.Name == "TeslaLab" then
                 highlightTeslaLab(newModel)
             end
         end)
