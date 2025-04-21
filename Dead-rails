@@ -116,7 +116,7 @@ end)
 local Toggle2 = Tabs.Main:CreateToggle("MyToggle", {Title = "Tesla Lab", Default = false})
 
 -- Store added highlights and GUIs for cleanup
-local teslalabVisuals = {}
+local teslaLabVisuals = {}
 
 Toggle2:OnChanged(function()
     if not Toggle2Interacted then
