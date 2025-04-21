@@ -22,7 +22,7 @@ local Tabs = {
 local Toggle1 = Tabs.Main:CreateToggle("MyToggle", {Title = "Train", Default = false})
 
 -- Store added highlights and GUIs for cleanup
-local addedVisuals = {}
+local trainVisuals = {}
 
 Toggle1:OnChanged(function()
     if not Toggle1Interacted then
@@ -69,8 +69,8 @@ Toggle1:OnChanged(function()
                 textLabel.Text = "Train - Distance: --"
 
                 -- Store the visuals to clean them up later
-                table.insert(addedVisuals, highlight)
-                table.insert(addedVisuals, billboardGui)
+                table.insert(trainVisuals, highlight)
+                table.insert(trainVisuals, billboardGui)
 
                 -- Continuously update the distance text
                 local heartbeatConn
@@ -104,19 +104,19 @@ Toggle1:OnChanged(function()
         end)
     else
         -- Toggle OFF: remove all visuals
-        for _, v in pairs(addedVisuals) do
+        for _, v in pairs(trainVisuals) do
             if v and v.Parent then
                 v:Destroy()
             end
         end
-        addedVisuals = {} -- Clear the table
+        trainVisuals = {} -- Clear the table
     end
 end)
 
 local Toggle2 = Tabs.Main:CreateToggle("MyToggle", {Title = "Tesla Lab", Default = false})
 
 -- Store added highlights and GUIs for cleanup
-local addedVisuals = {}
+local teslaLabVisuals = {}
 
 Toggle2:OnChanged(function()
     if not Toggle2Interacted then
@@ -163,8 +163,8 @@ Toggle2:OnChanged(function()
                 textLabel.Text = "TeslaLab - Distance: --"
 
                 -- Store the visuals to clean them up later
-                table.insert(addedVisuals, highlight)
-                table.insert(addedVisuals, billboardGui)
+                table.insert(teslaLabVisuals, highlight)
+                table.insert(teslaLabVisuals, billboardGui)
 
                 -- Continuously update the distance text
                 local heartbeatConn
@@ -198,12 +198,12 @@ Toggle2:OnChanged(function()
         end)
     else
         -- Toggle OFF: remove all visuals
-        for _, v in pairs(addedVisuals) do
+        for _, v in pairs(teslaLabVisuals) do
             if v and v.Parent then
                 v:Destroy()
             end
         end
-        addedVisuals = {} -- Clear the table
+        teslaLabVisuals = {} -- Clear the table
     end
 end)
 
