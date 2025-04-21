@@ -116,7 +116,7 @@ end)
 local Toggle2 = Tabs.Main:CreateToggle("MyToggle", {Title = "Tesla Lab", Default = false})
 
 -- Store added highlights and GUIs for cleanup
-local teslaLabVisuals = {}
+local teslalabVisuals = {}
 
 Toggle2:OnChanged(function()
     if not Toggle2Interacted then
@@ -169,7 +169,7 @@ Toggle2:OnChanged(function()
                 -- Continuously update the distance text
                 local heartbeatConn
                 heartbeatConn = game:GetService("RunService").Heartbeat:Connect(function()
-                    if not espteslaLabEnabled then
+                    if not espteslalabEnabled then
                         if heartbeatConn then
                             heartbeatConn:Disconnect()
                         end
