@@ -214,11 +214,11 @@ local Tabs = {
     }
 }
 
-local Toggle1 = Tabs.Main:CreateToggle("MyToggle", {Title = "Auto attack", Default = false})
+local Toggle3 = Tabs.Main:CreateToggle("MyToggle", {Title = "Auto attack", Default = false})
 
-Toggle1:OnChanged(function()
-    if not Toggle1Interacted then
-        Toggle1Interacted = true
+Toggle3:OnChanged(function()
+    if not Toggle3Interacted then
+        Toggle3Interacted = true
         return
     end
 
@@ -239,11 +239,11 @@ Toggle1:OnChanged(function()
     end
 end)
 
-local Toggle2 = Tabs.Main:CreateToggle("MyToggle", {Title = "aimbot zombie", Default = false})
+local Toggle4 = Tabs.Main:CreateToggle("MyToggle", {Title = "aimbot zombie", Default = false})
 
-Toggle2:OnChanged(function()
-    if not Toggle2Interacted then
-        Toggle2Interacted = true
+Toggle4:OnChanged(function()
+    if not Toggle4Interacted then
+        Toggle4Interacted = true
         return
     end
 
