@@ -169,7 +169,7 @@ Toggle2:OnChanged(function()
                 -- Continuously update the distance text
                 local heartbeatConn
                 heartbeatConn = game:GetService("RunService").Heartbeat:Connect(function()
-                    if not espteslalabEnabled then
+                    if not espteslaEnabled then
                         if heartbeatConn then
                             heartbeatConn:Disconnect()
                         end
