@@ -124,9 +124,9 @@ Toggle2:OnChanged(function()
         return
     end
 
-    espteslaEnabled = not espteslaEnabled
+    espteslaLabEnabled = not espteslaLabEnabled
 
-    if espteslaEnabled then
+    if espteslaLabEnabled then
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -169,7 +169,7 @@ Toggle2:OnChanged(function()
                 -- Continuously update the distance text
                 local heartbeatConn
                 heartbeatConn = game:GetService("RunService").Heartbeat:Connect(function()
-                    if not espteslaEnabled then
+                    if not espteslaLabEnabled then
                         if heartbeatConn then
                             heartbeatConn:Disconnect()
                         end
