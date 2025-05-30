@@ -1,4 +1,4 @@
-/summon armor_stand ~ ~ ~ {Invisible:1b,Invulnerable:1b,CustomName:'{"text":"Bot"}'}
+/summon villager ~ ~ ~ {NoAI:1b,Attributes:[{Name:"generic.max_health",Base:999999},{Name:"generic.knockback_resistance",Base:0.0}],Health:999999f,PersistenceRequired:1b,CustomName:'{"text":"Test Bot"}'}
 
 
 
