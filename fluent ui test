@@ -1,4 +1,16 @@
-/summon villager ~ ~ ~ {NoAI:1b,Invulnerable:0b,Attributes:[{Name:"generic.movement_speed",Base:0.0}],Health:1000000f,PersistenceRequired:1b,CustomName:'{"text":"Tank Villager"}'}
+/summon villager ~ ~ ~ {
+  Invulnerable:0b,
+  NoAI:1b,
+  Attributes:[
+    {Name:"generic.movement_speed",Base:0.0},
+    {Name:"generic.max_health",Base:999999},
+    {Name:"generic.knockback_resistance",Base:0.0}
+  ],
+  Health:999999f,
+  PersistenceRequired:1b,
+  CustomName:'{"text":"Tank Villager"}'
+}
+
 
 
 
