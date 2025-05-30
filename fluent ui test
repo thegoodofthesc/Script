@@ -1,4 +1,4 @@
-/summon villager ~ ~ ~ {Invulnerable:1b,NoAI:1b,Silent:1b,Invisible:1b,Attributes:[{Name:"generic.knockback_resistance",Base:0.0}]}
+/summon armor_stand ~ ~ ~ {Invisible:1b,Invulnerable:1b,CustomName:'{"text":"Bot"}'}
 
 
 
