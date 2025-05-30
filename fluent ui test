@@ -1,1 +1,35 @@
-Print("Hello World!")
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.screen.slot.SlotActionType;
+
+public class AutoTotemMod implements ClientModInitializer {
+    @Override
+    public void onInitializeClient() {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player == null || client.currentScreen != null) return;
+
+            ItemStack offhandStack = client.player.getOffHandStack();
+
+            // Only continue if offhand is empty
+            if (!offhandStack.isEmpty()) return;
+
+            // Loop through inventory slots 0-35
+            for (int i = 0; i < 36; i++) {
+                ItemStack stack = client.player.getInventory().getStack(i);
+                if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
+                    int syncId = client.player.currentScreenHandler.syncId;
+
+                    // Pick up the totem
+                    client.interactionManager.clickSlot(syncId, i, 0, SlotActionType.PICKUP, client.player);
+
+                    // Place into offhand (slot index 45)
+                    client.interactionManager.clickSlot(syncId, 45, 0, SlotActionType.PICKUP, client.player);
+                    break;
+                }
+            }
+        });
+    }
+}
